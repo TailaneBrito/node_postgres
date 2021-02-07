@@ -87,3 +87,14 @@ host    all             all             127.0.0.1/32            md5
 host    all             all             ::1/128                 md5
 
 
+run npm run configure
+type the user PASSWORD
+
+go to configuredb.sh and set a global variable with that PASSWORD
+run psql -U node_user monstersdb;
+
+psql -U node_user monstersdb;
+
+create the index.js inside db folder into root directory
+
+node db
