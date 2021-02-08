@@ -98,3 +98,11 @@ psql -U node_user monstersdb;
 create the index.js inside db folder into root directory
 
 node db
+
+add secrets folder with db_configurations
+
+add www file and put the server configurations within it.
+
+add new variables to package.json
+   "start": "node ./bin/www",
+   "dev": "nodemon ./bin/www"
