@@ -1,6 +1,5 @@
 const { Router } = require('express');
 const pool = require('../db');
-const { route } = require('../app');
 
 const router = Router();
 
@@ -32,6 +31,26 @@ router.post('/', (request, response, next) => {
         [name, personality],
         (err, res) => {
             if(err) return next(err);
+
+            response.redirect('/monsters');
+        }
+    );
+});
+
+router.put('/:id', (request, response, next) => {
+    const { id }  = request.params;
+
+    const { name, personality } = request.body;
+
+    const keys = ['name','personality'];
+
+    pool.query(
+        'UPDATE monsters SET name=($1), personality=($2) WHERE id=($3)',
+        [name, personality, id],
+        (err, res) => {
+            if (err) return next(err);
+
+            response.redirect('/monsters');
         }
     );
 });

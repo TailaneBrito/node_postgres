@@ -4,11 +4,13 @@ const monsters = require('./routes/monsters');
 
 const app = express();
 
+//middlewares always before the routes, so they can access them.
 app.use(bodyParser.json());
 
+//routes
 app.use('/monsters', monsters);
 
-//middlewares
+//error Handling
 app.use((err, req, res, next) => {
     res.json(err);
 });
