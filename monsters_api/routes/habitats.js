@@ -25,12 +25,12 @@ router.post('/', (request, response, next) => {
 });
 
 router.delete('/:id', (request, response, next) => {
-    const { id } = request.body;
+    const { id } = request.params;
 
-    pool.query('DELETE FROM habitats WHERE id=($1)', [id], (err, res) => {
+    pool.query('DELETE FROM habitats WHERE id=$1', [id], (err, res) => {
         if (err) return next(err);
 
-        response.redirect('/monsters');
+        response.redirect('/habitats');
     })
 })
 
