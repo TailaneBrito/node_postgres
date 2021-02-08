@@ -106,3 +106,5 @@ add www file and put the server configurations within it.
 add new variables to package.json
    "start": "node ./bin/www",
    "dev": "nodemon ./bin/www"
+
+create the app.js file and start setting up the environment with routes and required packages
