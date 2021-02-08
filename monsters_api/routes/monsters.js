@@ -27,7 +27,7 @@ router.post('/', (request, response, next) => {
     const { name, personality } = request.body;
 
     pool.query(
-        'INSERT INTO monsters(name, personality) VALUES ($1, $2)', 
+        `INSERT INTO monsters(name, personality) VALUES ($1, $2)`, 
         [name, personality],
         (err, res) => {
             if(err) return next(err);
@@ -44,15 +44,23 @@ router.put('/:id', (request, response, next) => {
 
     const keys = ['name','personality'];
 
-    pool.query(
-        'UPDATE monsters SET name=($1), personality=($2) WHERE id=($3)',
-        [name, personality, id],
-        (err, res) => {
-            if (err) return next(err);
+    const fields = [];
 
-            response.redirect('/monsters');
-        }
-    );
+    keys.forEach(key => {
+        if (request.body[key]) fields.push(key);
+    });
+
+    fields.forEach((field, index) => {
+        pool.query(
+            `UPDATE monsters SET ${field}=$1 WHERE id=$2`,
+            [request.body[field], id],
+            (err, res) => {
+                if (err) return next(err);
+    
+                if (index === fields.length - 1) response.redirect('/monsters');
+            }
+        )
+    });
 });
 
 
