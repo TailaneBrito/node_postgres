@@ -7,7 +7,7 @@ const app = express();
 //middlewares always before the routes, so they can access them.
 app.use(bodyParser.json());
 
-//routes
+//routers
 app.use('/monsters', monsters);
 
 //error Handling
